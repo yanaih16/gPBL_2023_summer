@@ -35,7 +35,7 @@ def register_user (request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect(to='login')
+            return redirect(to='index')
 
     else:
         form = SignupForm()
