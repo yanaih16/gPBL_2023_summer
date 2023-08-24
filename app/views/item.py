@@ -1,13 +1,9 @@
 from django.shortcuts import render
-from django.db.models import Max
-from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from ..models import Item
 from ..models import User
 from ..forms.item import ItemAdd
 
-
-# Create your views here.
 @login_required
 def item_add(request):
     if request.POST:
