@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Login</h1>
+<form action="" , method=POST>
+    {% csrf_token %}
+    <div>
+        <label>ユーザー名</label>
+        <input type="text" , name="username">
+    </div>
+    <br />
+    <div>
+        <label>パスワード</label>
+        <input type="password" , name="password">
+    </div>
+    <br />
+    <a href="{% url 'register' %}">Register</a>
+    <button type="submit">Login</button>
+</form>
+</body>
+
+
+{% endblock content %}
