@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% if messages %}
-        {% for message in messages %}
-                {{message}}
-        {% endfor %}
-    {% endif %}
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Register</h1>
-<form action = "{% url 'register' %}", method=POST>
-    {% csrf_token %}
-        {{ form.as_p }}
-    <button type = "submit">Register</button>
+{% extends 'base.html' %}
+{% block content %}
 
-</form>
+<body>
+    <h1>Register</h1>
+    <form action="{% url 'register' %}" , method=POST>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+
+    </form>
 </body>
-</html>
+{% endblock content %}
