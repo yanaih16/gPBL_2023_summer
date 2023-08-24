@@ -4,9 +4,14 @@
 <a href="{% url 'item_add' %}">商品を出品する</a>
 <a href="#">商品を購入する</a>
 {% if user.is_authenticated %}
-<p>{{ user.get_username }}でログイン中</p>
+<p>{{ user.get_username }}でログイン中<br>
+    <a href="{%url 'logout'%}">ログアウト</a>
+</p>
 {% else %}
-<p>ログインしていません</p>
+<p>ログインしていません<br>
+    <a href="{%url 'login'%}">ログイン</a><br>
+    <a href="{%url 'register'%}">ユーザー登録</a>
+</p>
 {% endif %}
 
 {% endblock content %}
