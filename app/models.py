@@ -1,18 +1,29 @@
 from django.db import models
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
+from django.utils import timezone
+from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
-class User(models.Model):
+class User(AbstractUser):
     sex_data = [
         (1, '男'),
         (2, '女'),
         (3, 'その他'),
     ]
-    name = models.CharField(max_length=255)
+    date_joined = None
+    first_name = None
+    last_name = None
     sex = models.IntegerField(choices=sex_data)
     birthday = models.DateField()
     adress = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+    REQUIRED_FIELDS = ["sex", "birthday"]
+
 
 class Item(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.PROTECT)
