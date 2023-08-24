@@ -1,5 +1,5 @@
 # gPBL_2023_summer
-## マイグレーション
+## データベース構築
 ```sh
 python3 manage.py makemigrations
 python3 manage.py migrate
