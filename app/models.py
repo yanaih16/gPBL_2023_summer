@@ -30,7 +30,7 @@ class Item(models.Model):
     name = models.CharField(max_length=255)
     text = models.TextField()
     value = models.IntegerField()
-    is_active = models.BooleanField()
+    is_active = models.BooleanField(default=True)
     image = models.ImageField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
