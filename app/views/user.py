@@ -18,7 +18,10 @@ def login_user (request):
             messages.success(request, ("ErrorLogin"))
             return redirect('login')
     else:
-        return render(request, "user/login.html")
+        content = {
+            "title" : "ログイン",
+        }
+        return render(request, "user/login.html", content)
 
 def logout_user (request):
     logout(request)
@@ -38,7 +41,8 @@ def register_user (request):
         form = SignupForm()
     
     param = {
-        'form': form
+        'form': form,
+        'title': 'ユーザー登録',
     }
 
     return render(request, 'user/register.html', param)
