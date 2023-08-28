@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 def index(request):
-    content = {
+    context = {
         "title": "MatchMarket",
     }
-    return render(request, "index.html", content)
+    return render(request, "index.html", context)

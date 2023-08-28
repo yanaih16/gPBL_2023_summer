@@ -1,7 +1,14 @@
 from django import forms
+from ..models import Item
 
-class ItemAdd(forms.Form):
-    name = forms.CharField(max_length=255, help_text='商品名')
-    text = forms.CharField(help_text='商品説明', widget=forms.Textarea(attrs={'cols': '80', 'rows': '10'}))
-    value = forms.IntegerField( help_text='価格')
-    image = forms.FileField(help_text="商品画像")
+class ItemAdd(forms.ModelForm): 
+    class Meta:
+        model = Item
+        fields = ('name','text','value', 'image')
+        labels = {
+            'name' : '商品名',
+            'text' : '商品説明',
+            'value' : '価格',
+            'image' : '画像',
+        }
+

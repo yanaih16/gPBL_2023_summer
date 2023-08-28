@@ -17,6 +17,12 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# 画像を保存する先の指定
+# 画像を保存する先の指定
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 画像をdjango側で読み込むための設定
+MEDIA_URL = '/media/'
 
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
