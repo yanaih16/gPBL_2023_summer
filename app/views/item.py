@@ -35,17 +35,17 @@ def item_tag_add(request, item_id):
         }
         return render(request, "message.html", context)
     if request.POST :
-        print(request.POST)
-        print(request.POST.getlist('tag_list'))
         tag_id_list = request.POST.getlist('tag_list')
+        print(tag_id_list)
         for tag_id in tag_id_list:
+            print(tag_id)
             tag = Tag.objects.get(id=tag_id)
             item_tag = Item_Tag(
                 item = item,
                 tag = tag,
             )
             item_tag.save()
-            return redirect("item_list")
+        return redirect("item_list")
         
     tag_list = Tag.objects.values("id", "name")
     context = {
