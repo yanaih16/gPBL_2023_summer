@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+<style>
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .table td {
+    border: 1px solid rgb(117, 8, 212);
+    padding: 8px;
+  }
+</style>
+  
+{% block content %}
+<h1>商品一覧</h1>
+<table class="table">
+    <tbody>
+      {% for item in item_list %}
+      <tr>
+        <td>{{item.name}}</td>
+        <td>{{item.text}}</td>
+        <td>{{item.value}}</td>
+        <td>{{item.image}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

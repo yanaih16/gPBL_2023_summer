@@ -9,6 +9,6 @@ urlpatterns = [
     path("login", user.login_user, name = "login"),
     path("logout", user.logout_user, name = "logout"),
     path("register", user.register_user, name = "register"),
-    path("item_list", item_list.ItemList.as_view(), name="item_list"),
+    path("item_list/", item_list.ItemList.as_view(), name="item_list"),
     path("item/add", item.item_add, name="item_add"),
 ]
