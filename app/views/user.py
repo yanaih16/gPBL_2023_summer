@@ -17,10 +17,10 @@ def login_user (request):
             messages.success(request, ("ErrorLogin"))
             return redirect('login')
     else:
-        content = {
+        context = {
             "title" : "ログイン",
         }
-        return render(request, "user/login.html", content)
+        return render(request, "user/login.html", context)
 
 def logout_user (request):
     logout(request)

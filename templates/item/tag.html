@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for tag in tag_list %}
+    <label><input type="checkbox" name="tag_list" value="{{tag.id}}">{{tag.name}}</label><br>
+    {% endfor %}
+    <input type="submit" name="button" value="送信">
+</form>
+{% endblock %}
