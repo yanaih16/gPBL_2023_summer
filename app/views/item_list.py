@@ -6,9 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models import Item
 
 class ItemList(LoginRequiredMixin, ListView):
-    model = Item
-    context_object_name = "item_list"
     template_name = "item/item_list.html"
+    queryset = Item.objects.order_by("-created_at")
 
     # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
