@@ -25,12 +25,12 @@ class User(AbstractUser):
 
 
 class Item(models.Model):
-    user_id = models.ForeignKey(User, on_delete = models.PROTECT)
+    user = models.ForeignKey(User, on_delete = models.PROTECT)
     name = models.CharField(max_length=255)
     text = models.TextField()
     value = models.IntegerField()
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True, upload_to="images/")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -46,8 +46,8 @@ class Tag(models.Model):
         verbose_name_plural = 'Tag'
 
 class Item_Tag(models.Model):
-    item_id = models.ForeignKey(Item, on_delete = models.PROTECT)
-    tag_id = models.ForeignKey(Tag, on_delete = models.PROTECT)
+    item = models.ForeignKey(Item, on_delete = models.PROTECT)
+    tag = models.ForeignKey(Tag, on_delete = models.PROTECT)
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -62,9 +62,9 @@ class Item_Tag(models.Model):
         verbose_name_plural = 'Item_Tag'
 
 class Matching(models.Model):
-    seller_id = models.ForeignKey(User, on_delete = models.PROTECT, related_name='seller_user')
-    buyer_id = models.ForeignKey(User, on_delete = models.PROTECT, related_name='buyer_user')
-    item_id = models.ForeignKey(Item, on_delete = models.PROTECT)
+    seller = models.ForeignKey(User, on_delete = models.PROTECT, related_name='seller_user')
+    buyer = models.ForeignKey(User, on_delete = models.PROTECT, related_name='buyer_user')
+    item = models.ForeignKey(Item, on_delete = models.PROTECT)
     matching_date = models.DateTimeField(auto_now_add=True)
     class Meta:
         verbose_name_plural = 'Matching'
@@ -79,8 +79,8 @@ class Matching(models.Model):
         return f"{self.item_id} {self.buyer_id}"
 
 class Chat(models.Model):
-    matching_id = models.ForeignKey(Matching, on_delete = models.PROTECT)
-    sender_id = models.ForeignKey(User, on_delete = models.PROTECT)
+    matching = models.ForeignKey(Matching, on_delete = models.PROTECT)
+    sender = models.ForeignKey(User, on_delete = models.PROTECT)
     text = models.TextField()
     sented_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
@@ -89,8 +89,8 @@ class Chat(models.Model):
         verbose_name_plural = 'Chat'
 
 class Review(models.Model):
-    rater_id = models.ForeignKey(Matching, on_delete = models.PROTECT, related_name='rater_user')
-    evaluator_id = models.ForeignKey(Matching, on_delete = models.PROTECT, related_name='evaluator_user')
+    rater = models.ForeignKey(Matching, on_delete = models.PROTECT, related_name='rater_user')
+    evaluator = models.ForeignKey(Matching, on_delete = models.PROTECT, related_name='evaluator_user')
     score = models.IntegerField()
     text = models.TextField()
     class Meta:
