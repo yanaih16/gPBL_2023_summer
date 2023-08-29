@@ -13,6 +13,5 @@ urlpatterns = [
     path("item_list/", item_list.ItemList.as_view(), name="item_list"),
     path("item/add", item.item_add, name="item_add"),
     path("item/tag/<int:item_id>", item.item_tag_add, name="item_tag_add"),
-    path('item_list/<int:pk>/', item_update.ItemUpdateView.as_view(), name='item_edit'),
-
+    path('item_list/<int:pk>/edit', item_update.ItemUpdateView.as_view(), name='item_edit'),
 ]
