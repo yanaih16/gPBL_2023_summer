@@ -29,6 +29,6 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     
     # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
-        return Item.objects.filter(user_id=self.request.user)
+        return Item.objects.filter(user=self.request.user)
     def get_success_url(self):
         return reverse("item_tag_add", args=[str(self.object.pk)])
