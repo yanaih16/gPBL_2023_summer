@@ -12,7 +12,7 @@
       object-fit: contain;  
       display: block;  /* ブロックレベル要素として表示 */
       margin: 0 auto;  /* 水平方向に中央寄せ */
-      background-color: grey;
+      background-color: #323F4E;
     }
 
     @media (min-width: 768px) {
@@ -117,7 +117,8 @@
               <h4 class="card-text text-center border-bottom">{{object.name}}</h4>
               <div class="d-flex justify-content-between align-items-center mt-auto">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <!--<button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='{% url 'item_edit' object.pk %}'">Edit</button>
                 </div>
                 <h4 class="card-text text-center border-bottom">{{object.value}}円</h4>
 
