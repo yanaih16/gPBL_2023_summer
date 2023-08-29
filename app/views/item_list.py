@@ -8,6 +8,7 @@ from ..models import Item
 class ItemList(LoginRequiredMixin, ListView):
     template_name = "item/item_list.html"
     queryset = Item.objects.order_by("-created_at")
+    login_url = 'login'
 
     # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):

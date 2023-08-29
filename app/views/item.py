@@ -36,7 +36,6 @@ def item_tag_add(request, item_id):
         return render(request, "message.html", context)
     if request.POST :
         tag_id_list = request.POST.getlist('tag_list')
-        print(tag_id_list)
         for tag_id in tag_id_list:
             print(tag_id)
             tag = Tag.objects.get(id=tag_id)

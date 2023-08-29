@@ -9,6 +9,12 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ['name', 'text', 'value', 'image']  # 必要なフィールドのみを指定
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+
 
 
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
@@ -16,6 +22,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ItemForm
     template_name = 'item/item_update.html'
     success_url = reverse_lazy("item_list")  # 成功時のリダイレクト先を指定します。
+    login_url = 'login'
 
     # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
