@@ -3,8 +3,8 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {% for tag in tags %}
-        <input type="checkbox" name="tags" value="{{ tag.id }}"> {{ tag.name }}<br>
+    {% for tag in tag_list %}
+    <input type="checkbox" name="tags" value="{{ tag.id }}"> {{ tag.name }}<br>
     {% endfor %}
     <input type="submit" value="Submit">
 </form>

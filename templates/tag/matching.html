@@ -1,8 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% for item in items %}
-    <h3>{{ item.name }}</h3>
-    <p>{{ item.text }}</p>
-{% endfor %}
+<h1 id="item_name"></h1>
+<p id="item_text"></p>
+<p id="item_img"></p>
+<p id="item_value"></p>
+<p id="item_user"></p>
+<button id="next-button">Next Data</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var currentIndex = 0;
+        var data = JSON.parse('{{ items|safe }}');
+        console.log(data);
+
+        function displayData(index) {
+            if (index < data.length) {
+                document.getElementById('item_name').innerHTML = data[index].name;
+                document.getElementById('item_text').innerHTML = data[index].text;
+                document.getElementById('item_img').innerHTML = "<img class='' src='" + data[index].image + "'>"
+                document.getElementById('item_value').innerHTML = data[index].value;
+                document.getElementById('item_user').innerHTML = data[index].user;
+                currentIndex = index;
+            }
+        }
+
+        $('#next-button').click(function () {
+            displayData(currentIndex + 1);
+        });
+
+        // ページ読み込み時にデータを取得して表示
+        $.ajax({
+            success: function () {
+                displayData(currentIndex);
+            }
+        });
+    });
+</script>
 {% endblock %}
