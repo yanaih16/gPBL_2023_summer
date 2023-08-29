@@ -3,11 +3,16 @@
 {% block content %}
   <style>
     .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
+      display: flex;          /* Flexboxを利用してテキストを中央に配置 */
+      align-items: center;    /* 垂直方向中央揃え */
+      justify-content: center; /* 水平方向中央揃え */
+
+      width: 100%;  /* 画像の幅をカードの幅に合わせる */
+      max-height: 300px;  /* 画像の最大高さを設定 */
+      object-fit: contain;  
+      display: block;  /* ブロックレベル要素として表示 */
+      margin: 0 auto;  /* 水平方向に中央寄せ */
+      background-color: grey;
     }
 
     @media (min-width: 768px) {
@@ -73,6 +78,12 @@
     .bd-mode-toggle {
       z-index: 1500;
     }
+    .card-fix {
+      height: 400px;  /* あなたの希望する高さに設定してください */
+      overflow: hidden;
+    }
+
+  
   </style>
   <body>
 
@@ -99,24 +110,25 @@
 
         {% for object in object_list %}
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm card-fix d-flex flex-column">
             <img class="bd-placeholder-img card-img-top" src="{{ object.image.url }}" alt="Image for {{ object.name }}">
 
-            <div class="card-body">
-              <p class="card-text">{{object.text|truncatechars:50}}</p>
-              <div class="d-flex justify-content-between align-items-center">
+            <div class="card-body card-body-fix flex-grow-1 d-flex flex-column">
+              <h4 class="card-text text-center border-bottom">{{object.name}}</h4>
+              <div class="d-flex justify-content-between align-items-center mt-auto">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                 </div>
-                <h4 class="card-text text-center border-bottom">{{object.value}}</h4>
+                <h4 class="card-text text-center border-bottom">{{object.value}}円</h4>
 
-                <small class="text-body-secondary">{{object.crated_at}}</small>
+                <small class="text-body-secondary">{{object.created_at}}</small>
               </div>
             </div>
           </div>
         </div>
         {% endfor %}
 
+        <!--
         <div class="col">
           <div class="card shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
@@ -133,95 +145,9 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <h4 class="card-text text-center border-bottom">2,000</h4>
-
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <h4 class="card-text text-center border-bottom">2,000</h4>
-
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <h4 class="card-text text-center border-bottom">2,000</h4>
-
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <h4 class="card-text text-center border-bottom">2,000</h4>
-
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <!--
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            -->
-            <img class="bd-placeholder-img card-img-top" src="path/to/your/image.jpg" alt="Placeholder: Thumbnail" width="100%" height="225">
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-
-                <!--右下のボタン-->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <h4 class="card-text text-center border-bottom">2,000</h4>
-
-                <!--更新時間-->
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
+      -->
+        
+        
 
         
 
