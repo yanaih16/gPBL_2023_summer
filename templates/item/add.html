@@ -4,7 +4,7 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">追加する</button>
+    <button type="submit" class="btn btn-primary">追加する</button>
 </form>
 
 {% endblock content %}
