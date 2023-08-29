@@ -9,7 +9,6 @@ class ItemList(LoginRequiredMixin, ListView):
     template_name = "item/item_list.html"
     login_url = 'login'
 
-        # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
         # ログイン中のユーザーのみアクセス可能
         if self.request.user.is_authenticated:
