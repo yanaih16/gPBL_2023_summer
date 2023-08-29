@@ -22,7 +22,6 @@ def select_tags(request):
                 'image' : item.image.url,
                 'value' : item.value,
             })
-
         return render(request, 'tag/matching.html', {'items': json.dumps(data)})
     else:
         tag_list = Tag.objects.values("id", "name")
