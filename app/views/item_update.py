@@ -1,11 +1,15 @@
 from django.views.generic import UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse
 from ..models import Item
 from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ItemForm(forms.ModelForm):
+    name = forms.CharField(label="商品名")
+    text = forms.CharField(label="商品説明", widget=forms.Textarea)
+    value = forms.IntegerField(label="価格")
+    image = forms.ImageField(label="画像")
     class Meta:
         model = Item
         fields = ['name', 'text', 'value', 'image']  # 必要なフィールドのみを指定
@@ -21,9 +25,10 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = Item
     form_class = ItemForm
     template_name = 'item/item_update.html'
-    success_url = reverse_lazy("item_list")  # 成功時のリダイレクト先を指定
     login_url = 'login'
     
     # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
         return Item.objects.filter(user_id=self.request.user)
+    def get_success_url(self):
+        return reverse("item_tag_add", args=[str(self.object.pk)])
