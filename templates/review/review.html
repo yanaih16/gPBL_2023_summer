@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="review-container">
+    <form id="review-form">
+    <input type="hidden" name="rater" value="{{ request.user.id }}">
+    <input type="hidden" name="evaluator" value="{{ seller_id }}">
+    <div class="rating">
+        <span class="star" data-score="1">&#9733;</span>
+        <span class="star" data-score="2">&#9733;</span>
+        <span class="star" data-score="3">&#9733;</span>
+        <span class="star" data-score="4">&#9733;</span>
+        <span class="star" data-score="5">&#9733;</span>
+    </div>
+    <textarea name="text" placeholder="Nhận xét" required></textarea>
+    <button type="submit">Gửi đánh giá</button>
+</form>
+
+    <div id="seller-reviews">
+        <!-- Đánh giá sẽ được hiển thị ở đây -->
+    </div>
+</div>
+
+<style>
+.rating {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.star {
+    cursor: pointer;
+    color: gray;
+    transition: color 0.2s;
+}
+
+.star:hover {
+    color: orange;
+}
+</style>
+
+<script>
+const reviewForm = document.getElementById('review-form');
+const stars = document.querySelectorAll('.star');
+
+let selectedScore = 0;
+
+stars.forEach((star) => {
+    star.addEventListener('click', () => {
+        selectedScore = parseInt(star.getAttribute('data-score'));
+        updateStarColors();
+    });
+});
+
+function updateStarColors() {
+    stars.forEach((star, index) => {
+        if (index < selectedScore) {
+            star.style.color = 'orange';
+        } else {
+            star.style.color = 'gray';
+        }
+    });
+}
+
+reviewForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(reviewForm);
+    formData.append('score', selectedScore);
+
+    try {
+        const response = await fetch(`/add_review/`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert('Đánh giá đã được gửi.');
+            fetchReviews({{ seller_id }});
+            reviewForm.reset();
+            selectedScore = 0;
+            updateStarColors();
+        } else {
+            alert('Có lỗi xảy ra khi gửi đánh giá.');
+        }
+    } catch (error) {
+        console.error('Lỗi:', error);
+    }
+});
+
+async function fetchReviews(userId) {
+    try {
+        const response = await fetch(`/get_reviews/${userId}/`);
+
+        if (response.ok) {
+            const reviews = await response.json();
+            const sellerReviews = document.getElementById('seller-reviews');
+            sellerReviews.innerHTML = '';
+
+            reviews.forEach((review) => {
+                const reviewElement = document.createElement('div');
+                reviewElement.innerHTML = `
+                    <p>Điểm: ${review.score}</p>
+                    <p>Nhận xét: ${review.text}</p>
+                `;
+                sellerReviews.appendChild(reviewElement);
+            });
+        } else {
+            console.log('Có lỗi khi lấy đánh giá.');
+        }
+    } catch (error) {
+        console.error('Lỗi:', error);
+    }
+}
+
+// Gọi hàm fetchReviews với seller_id khi trang được tải.
+fetchReviews({{ seller_id }});
+</script>
+
+{% endblock %}
+
+

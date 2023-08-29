@@ -16,4 +16,6 @@ urlpatterns = [
     path("item/tag/<int:item_id>", item.item_tag_add, name="item_tag_add"),
     path('item_list/<int:pk>/', item_update.ItemUpdateView.as_view(), name='item_edit'),
     path('review/<int:matching_id>/', user_review.review, name='review'),
+    path('add_review/', user_review.add_review, name='add_review'),
+    path('get_reviews/<int:user_id>/', user_review.get_reviews, name='get_reviews'),
 ]
