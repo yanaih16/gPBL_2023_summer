@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'app',
     'rest_framework',
+    'gensim',
 ]
 
 MIDDLEWARE = [

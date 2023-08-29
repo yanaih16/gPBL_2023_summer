@@ -31,7 +31,7 @@ class Command(BaseCommand):
             user.set_password(password)
             user.save()
 
-        tag_array = ["小説", "服", "家具", "アウトドア", "靴", "参考書", "漫画", "パソコン", "アクセサリー", "美術品"]
+        tag_array = ["小説", "服", "家具", "アウトドア", "靴", "参考書", "漫画", "パソコン", "アクセサリー", "アート"]
         for i in tag_array:
             tag = Tag(
                 name = i,
@@ -45,6 +45,8 @@ class Command(BaseCommand):
                 item = Item(
                     name = "item"+str(i) + "-" + str(j),
                     user = user,
+                    text = "item"+str(i) + "-" + str(j),
+                    image = "images/istockphoto.jpg",
                     value = i * 1000 + 1000,
                 )
                 item.save()
