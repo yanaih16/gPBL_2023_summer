@@ -22,6 +22,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ItemForm
     template_name = 'item/item_update.html'
     success_url = reverse_lazy("item_list")  # 成功時のリダイレクト先を指定します。
+    login_url = 'login'
 
     # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
