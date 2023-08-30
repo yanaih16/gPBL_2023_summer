@@ -6,7 +6,14 @@
 <p id="item_img"></p>
 <p id="item_value"></p>
 <p id="item_user"></p>
-<button id="next-button">Next Data</button>
+<img class='' src=''>
+<button class="btn btn-primary" id="next-button">Next Data</button>
+<form method="POST" action="{%url 'match_success'%}">
+    {% csrf_token %}
+    <input type="hidden" value="" id="user_id">
+    <input type="hidden" value="" id="item_id">
+    <input class="btn btn-primary" type="submit" value="Match">
+</form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -22,6 +29,8 @@
                 document.getElementById('item_img').innerHTML = "<img class='' src='" + data[index].image + "'>"
                 document.getElementById('item_value').innerHTML = data[index].value;
                 document.getElementById('item_user').innerHTML = data[index].user;
+                document.getElementById('item_id').value = data[index].item_id;
+                document.getElementById('user_id').value = data[index].user_id;
                 currentIndex = index;
             }
         }
