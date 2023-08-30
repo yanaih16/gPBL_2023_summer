@@ -18,5 +18,5 @@ urlpatterns = [
     path('item_list/<int:pk>/', item_update.ItemUpdateView.as_view(), name='item_edit'),
     path('match', tag.matching, name='match'),
     path('match/succes', tag.match_succes, name='match_succes'),
-    
+    path('item_list/<int:pk>/edit', item_update.ItemUpdateView.as_view(), name='item_edit'),
 ]

@@ -7,9 +7,11 @@ from ..models import Item
 
 class ItemList(LoginRequiredMixin, ListView):
     template_name = "item/item_list.html"
-    queryset = Item.objects.order_by("-created_at")
     login_url = 'login'
 
-    # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
-        return Item.objects.filter(user_id=self.request.user)
+        # ログイン中のユーザーのみアクセス可能
+        if self.request.user.is_authenticated:
+            return Item.objects.filter(user=self.request.user).order_by("-created_at")
+        return Item.objects.none()  # ログインしていない場合は空のクエリセットを返す
+
