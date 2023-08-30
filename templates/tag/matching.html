@@ -8,10 +8,10 @@
 <p id="item_user"></p>
 <img class='' src=''>
 <button class="btn btn-primary" id="next-button">Next Data</button>
-<form method="POST">
+<form method="POST" action="{%url 'match_succes'%}">
     {% csrf_token %}
-    <input type="hidden" value="" id="user_id">
-    <input type="hidden" value="" id="item_id">
+    <input type="hidden" value="" id="user_id" name="user_id" />
+    <input type="hidden" value="" id="item_id" name="item_id" />
     <input class="btn btn-primary" type="submit" value="Match">
 </form>
 
