@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from app.models import Tag, Item, User, Item_Tag
+from app.models import Tag, Item, User, Item_Tag, Matching
 import json
 from gensim.models import KeyedVectors
 import operator
@@ -55,3 +55,16 @@ def matching(request):
     else:
         return redirect('select_tags')
 
+def match_succes(request):
+    if request.method == 'POST':
+        seller=User.objects.get(id=request.user.id)
+        buyer=User.objects.get(id=request.POST['user_id'])
+        item=Item.objects.get(id=request.POST['item_id'])
+        print(request.POST)
+        match = Matching(
+            seller=seller,
+            buyer=buyer,
+            item=item,
+        )
+        match.save()
+        return render(request, 'tag/succes.html')

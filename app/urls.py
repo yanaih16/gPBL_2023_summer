@@ -17,5 +17,6 @@ urlpatterns = [
     path("select_tags/", tag.select_tags, name="select_tags"),
     path('item_list/<int:pk>/', item_update.ItemUpdateView.as_view(), name='item_edit'),
     path('match', tag.matching, name='match'),
+    path('match/succes', tag.match_succes, name='match_succes'),
     
 ]
