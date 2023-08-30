@@ -4,6 +4,9 @@ from .views import item_list
 from .views import user
 from .views import item
 from .views import chat
+from .views import tag
+from .views import item_update
+
 urlpatterns = [
     path("", top.index, name="index"),
     path("login", user.login_user, name = "login"),
@@ -15,4 +18,10 @@ urlpatterns = [
     path('receive_data', chat.receive_data, name='receive_data'),
     path('chat/<id>',chat.chat,name='chat'),
     path('user',chat.all_user,name='all_user'),
+    path("item/tag/<int:item_id>", item.item_tag_add, name="item_tag_add"),
+    path("select_tags/", tag.select_tags, name="select_tags"),
+    path('item_list/<int:pk>/', item_update.ItemUpdateView.as_view(), name='item_edit'),
+    path('match', tag.matching, name='match'),
+    path('match/succes', tag.match_succes, name='match_succes'),
+    path('item_list/<int:pk>/edit', item_update.ItemUpdateView.as_view(), name='item_edit'),
 ]

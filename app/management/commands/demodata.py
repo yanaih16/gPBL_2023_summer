@@ -44,7 +44,7 @@ class Command(BaseCommand):
             for j in range(random.randint(0, 3)):
                 item = Item(
                     name = "item"+str(i) + "-" + str(j),
-                    user_id = user,
+                    user = user,
                     value = i * 1000 + 1000,
                 )
                 item.save()
@@ -52,8 +52,8 @@ class Command(BaseCommand):
                     item = Item.objects.get(name="item"+str(i) + "-" + str(j))
                     tag = Tag.objects.get(name=tag_array[tmp])
                     item_tag = Item_Tag(
-                        item_id = item,
-                        tag_id = tag,
+                        item = item,
+                        tag = tag,
                     )
                     tmp += 1
                     tmp %= 10

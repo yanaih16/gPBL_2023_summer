@@ -6,10 +6,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models import Item
 
 class ItemList(LoginRequiredMixin, ListView):
-    model = Item
-    context_object_name = "item_list"
     template_name = "item/item_list.html"
+    login_url = 'login'
 
-    # ログイン中のユーザーのみアクセス可能
     def get_queryset(self):
-        return Item.objects.filter(user_id=self.request.user)
+        # ログイン中のユーザーのみアクセス可能
+        if self.request.user.is_authenticated:
+            return Item.objects.filter(user=self.request.user).order_by("-created_at")
+        return Item.objects.none()  # ログインしていない場合は空のクエリセットを返す
+
