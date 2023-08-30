@@ -1,19 +1,64 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 id="item_name"></h1>
-<p id="item_text"></p>
-<p id="item_img"></p>
-<p id="item_value"></p>
-<p id="item_user"></p>
-<img class='' src=''>
-<button class="btn btn-primary" id="next-button">Next Data</button>
-<form method="POST" action="{%url 'match_succes'%}">
-    {% csrf_token %}
-    <input type="hidden" value="" id="user_id" name="user_id" />
-    <input type="hidden" value="" id="item_id" name="item_id" />
-    <input class="btn btn-primary" type="submit" value="Match">
-</form>
+<style>
+    .custom-image-size {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .content-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .text-box {
+        border: 1px solid black;
+        padding: 10px;
+        width: 50%;
+        height: 400px;
+        overflow-y: auto;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+</style>
+
+<div class="content-wrapper">
+    <h1 id="item_name" class="text-center"></h1>
+
+    <div class="row">
+        <img id="item_img" class="custom-image-size" src="" alt="Item Image">
+        <div class="text-box" id="item_text"></div>
+    </div>
+
+    <p id="item_value"></p>
+    <p id="item_user"></p>
+
+    <div class="button-container">
+        <button class="btn btn-primary" id="next-button">Next Data</button>
+
+        <form method="POST" action="{%url 'match_succes'%}">
+            {% csrf_token %}
+            <input type="hidden" value="" id="user_id" name="user_id" />
+            <input type="hidden" value="" id="item_id" name="item_id" />
+            <input class="btn btn-primary" type="submit" value="Match">
+        </form>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -26,7 +71,7 @@
             if (index < data.length) {
                 document.getElementById('item_name').innerHTML = data[index].name;
                 document.getElementById('item_text').innerHTML = data[index].text;
-                document.getElementById('item_img').innerHTML = "<img class='' src='" + data[index].image + "'>"
+                document.getElementById('item_img').src = data[index].image;  
                 document.getElementById('item_value').innerHTML = data[index].value;
                 document.getElementById('item_user').innerHTML = data[index].user;
                 document.getElementById('item_id').value = data[index].item_id;
