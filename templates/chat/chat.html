@@ -4,398 +4,214 @@
     <meta charset="UTF-8">
     <title>Chat</title>
     <style media="screen">
-    body{
-    background-color: #f4f7f6;
-    margin-top:20px;
-}
-.card {
-    background: #fff;
-    transition: .5s;
-    border: 0;
-    margin-bottom: 30px;
-    border-radius: .55rem;
-    position: relative;
-    width: 100%;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
-}
-.chat-app .people-list {
-    width: 280px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 20px;
-    z-index: 7
-}
+    * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    }
+    <h2> {
+        color: white;
+    }
+    .parent {
+      background-color: #f4f4f4;
+    }
+    .parent {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        /* background-image: url("/static/img/bck.jpg");  */
 
-.chat-app .chat {
-    margin-left: 280px;
-    border-left: 1px solid #eaeaea
-}
-
-.people-list {
-    -moz-transition: .5s;
-    -o-transition: .5s;
-    -webkit-transition: .5s;
-    transition: .5s
-}
-
-.people-list .chat-list li {
-    padding: 10px 15px;
-    list-style: none;
-    border-radius: 3px
-}
-
-.people-list .chat-list li:hover {
-    background: #efefef;
-    cursor: pointer
-}
-
-.people-list .chat-list li.active {
-    background: #efefef
-}
-
-.people-list .chat-list li .name {
-    font-size: 15px
-}
-
-.people-list .chat-list img {
-    width: 45px;
-    border-radius: 50%
-}
-
-.people-list img {
-    float: left;
-    border-radius: 50%
-}
-
-.people-list .about {
-    float: left;
-    padding-left: 8px
-}
-
-.people-list .status {
-    color: #999;
-    font-size: 13px
-}
-
-.chat .chat-header {
-    padding: 15px 20px;
-    border-bottom: 2px solid #f4f7f6
-}
-
-.chat .chat-header img {
-    float: left;
-    border-radius: 40px;
-    width: 40px
-}
-
-.chat .chat-header .chat-about {
-    float: left;
-    padding-left: 10px
-}
-
-.chat .chat-history {
-    padding: 20px;
-    border-bottom: 2px solid #fff
-}
-
-.chat .chat-history ul {
-    padding: 0
-}
-
-.chat .chat-history ul li {
-    list-style: none;
-    margin-bottom: 30px
-}
-
-.chat .chat-history ul li:last-child {
-    margin-bottom: 0px
-}
-
-.chat .chat-history .message-data {
-    margin-bottom: 15px
-}
-
-.chat .chat-history .message-data img {
-    border-radius: 40px;
-    width: 40px
-}
-
-.chat .chat-history .message-data-time {
-    color: #434651;
-    padding-left: 6px
-}
-
-.chat .chat-history .message {
-    color: #444;
-    padding: 18px 20px;
-    line-height: 26px;
-    font-size: 16px;
-    border-radius: 7px;
-    display: inline-block;
-    position: relative
-}
-
-.chat .chat-history .message:after {
-    bottom: 100%;
-    left: 7%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: #fff;
-    border-width: 10px;
-    margin-left: -10px
-}
-
-.chat .chat-history .my-message {
-    background: #efefef
-}
-
-.chat .chat-history .my-message:after {
-    bottom: 100%;
-    left: 30px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: #efefef;
-    border-width: 10px;
-    margin-left: -10px
-}
-
-.chat .chat-history .other-message {
-    background: #e8f1f3;
-    text-align: right
-}
-
-.chat .chat-history .other-message:after {
-    border-bottom-color: #e8f1f3;
-    left: 93%
-}
-
-.chat .chat-message {
-    padding: 20px
-}
-
-.online,
-.offline,
-.me {
-    margin-right: 2px;
-    font-size: 8px;
-    vertical-align: middle
-}
-
-.online {
-    color: #86c541
-}
-
-.offline {
-    color: #e47297
-}
-
-.me {
-    color: #1d8ecd
-}
-
-.float-right {
-    float: right
-}
-
-.clearfix:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0
-}
-
-@media only screen and (max-width: 767px) {
-    .chat-app .people-list {
-        height: 465px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        align-items: center;
         width: 100%;
-        overflow-x: auto;
-        background: #fff;
-        left: -400px;
-        display: none
     }
-    .chat-app .people-list.open {
-        left: 0
-    }
-    .chat-app .chat {
-        margin: 0
-    }
-    .chat-app .chat .chat-header {
-        border-radius: 0.55rem 0.55rem 0 0
-    }
-    .chat-app .chat-history {
-        height: 300px;
-        overflow-x: auto
-    }
-}
+    .child-1 {
+        /* height: 70vh; */
+        width: 30%;
+        margin: 10px;
+        border-radius: 10px;
 
-@media only screen and (min-width: 768px) and (max-width: 992px) {
-    .chat-app .chat-list {
-        height: 650px;
-        overflow-x: auto
+        background-color: white;
     }
-    .chat-app .chat-history {
-        height: 600px;
-        overflow-x: auto
-    }
-}
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-    .chat-app .chat-list {
-        height: 480px;
-        overflow-x: auto
+    .chat-room {
+        width: 100%;
+        /* max-height: ; */
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #fff;
+        border: 1px solid dodgerblue;
     }
-    .chat-app .chat-history {
-        height: calc(100vh - 350px);
-        overflow-x: auto
+
+    .profile-pic {
+        /* height: 80px; */
+        width: 15%;
+
+        border-radius: 50px;
+        background-color: #fff;
     }
-}
+
+    .profile-pic img {
+        width:100%;
+        height:100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .chat-room h3 {
+        color: #000;
+    }
+
+    .chat-room h3 {
+        background-color: gray;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .chat-room h3 a {
+        text-decoration: none;
+        color: white;
+    }
+
+
+    .child-2 {
+        /* max-height: 100vh; */
+        width: 50%;
+        margin: 10px;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #323F4E;
+    }
+
+    .chat-body-parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* height: 60vh; */
+    }
+
+    .chat-body, .message {
+        /* max-height: 100vh; */
+        width: 100%;
+        background-color: #659DBD;
+        border-radius: 10px;
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .chat-body .message .receive, .send {
+        background-color: #FFFFFF;
+        max-width: 400px;
+
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .send:hover {
+        padding: 15px;
+        transition: 0.8s;
+    }
+
+    .receive:hover {
+        padding: 15px;
+        transition: 0.8s;
+    }
+
+    .chat-body .message .send {
+        align-self: flex-end;
+    }
+
+    .chat-body .message .receive {
+        align-self: flex-start;
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    form textarea {
+        width: 70%;
+        height: 40px;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    form button {
+        width: 25%;
+        padding: 10px;
+        background-color: #DAAD86;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+    }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-lg-12">
-            <div class="card chat-app">
-                <div id="plist" class="people-list">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-search"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Search...">
-                    </div>
-                    {% for users in user_list %}
-                        {% if user != users %}
-                        <ul class="list-unstyled chat-list mt-2 mb-0">
-                            <li class="clearfix">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name"><a href='{% url "chat" users.id %}'>{{users.username}}</a></div>
-                                    <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
+  <div class="parent">
+        <div class="child-2">
+            <center><font color="white"><h2>Messages</h2></font></center><hr>
+            <div class="chat-body-parent">
+                <div class="chat-body" id="tasks">
+                    <div class="message">
+                      <!-- received messages and displayed here -->
+                        {% for i in messages %}
+                            {% if i.sender != user %}
+                                <div class="receive">
+                                    <p style="color: #000;"> {{i.message}}<strong>-{{i.sender}}</strong></p>
                                 </div>
-                            </li>
-                        </ul>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div class="chat">
-                    <div class="chat-header clearfix">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                </a>
-                                            <div class="chat-about">
-                                                <h6 class="m-b-0">{{user.username}}</h6>
-                                                <small>Last seen: 2 hours ago</small>
-                                            </div>
-                            </div>
-                            <div class="col-lg-6 hidden-sm text-right">
-                                <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
-                            </div>
-                        </div>
+                            {% else %}
+                                <div class="send">
+                                    <p style="color: #000;">{{i.message}}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    <!-- end receive messages -->
+
+
                     </div>
-                    <div class="chat-history">
-                        <ul class="m-b-0">
-                            <div class="msg">
-                                <ul>
-                                    {% for chat in chat_sender %}
-                                        <li class="clearfix">
-                                            <div class="message-data text-right">
-                                                <span class="message-data-time">{{chat.sender}}</span>
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                            </div>
-                                            <div class="message other-message float-right">{{chat.text}}</div>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="chat">
-                                <ul class="chatul">
-                                    {% for chat in chat_receive %}
-                                        <li class="clearfix">
-                                            <div class="message-data">
-                                                <span class="message-data-time">{{chat.sender}}</span>
-                                            </div>
-                                            <div class="message my-message"><li id="{{chat.id}}">{{chat.text}}</li></div>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </ul>
-                    </div>
-                <div class="chat">
-                </div>
-                    <div class="chat-message clearfix">
-                        <div class="input-group mb-0">
-                            <div class="main">
-                                <input type="text" id="msg" placeholder="Enetr msg">
-                                <button type="button" id='btn'>Send</button>
-                          </div>
-                        </div>
+
+                    <div class="form">
+                        <form action="" id="message" method="POST">
+                            {% csrf_token %}
+                            <textarea id="msg" cols="30" name="message" rows="10" placeholder="メッセージを入力してください" required></textarea>
+                            <button class="submit" type="submit">送信</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <script type="text/javascript">
-  $('#btn').click(function(event) {
-    /* Act on the event */
-    messages=$('#msg').val();
-    if (messages.length>0) {
-      $.ajax({
-      url: '{% url "com" %}',
-      type: 'POST',
-      dataType: 'json',
-      data: {msg: messages,receiver:'{{data.receiver}}',csrfmiddlewaretoken:"{{csrf_token}}"}
-    })
-    .done(function(data) {
-      $('#msg').val('');
-      $('.msg ul').append('<li> {{data.sender}} :'+messages+' </li>');
-    })
-    .fail(function() {
-      console.log("error");
-    })
-  }
-  // RECEIVE MESSAGE WITH AJAX
-  });
-function receive() {
-  var lastli = $('.chatul li:last-child').prop('id')
+$(document).on('submit', '#message', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: "",
+        data: {
+            message: $('#msg').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        }
+    });
+    $( ".parent" ).load(window.location.href + " .parent" );
+})
 
-  $.ajax({
-    url:'{% url "receive_data" %}',
-    type: 'POST',
-    dataType: 'json',
-    data: {receiver:'{{data.receiver}}',csrfmiddlewaretoken:"{{csrf_token}}"}
-  })
-  .done(function(a) {
-    var id = 0
-    if (a.id != lastli){
-    $('.chat ul ').append('<li id='+a.id+'> {{data.receiver}} :'+a.chat+' </li>');
-  }
-  })
-  .fail(function() {
-    console.log("error");
-  })
-}
-setInterval(receive,1000);
-
+$(document).ready(function(){
+    setInterval(function(){
+        $( ".message" ).load(window.location.href + " .message" );
+    }, 2000)
+})
 </script>
 </body>
 {% endblock content %}

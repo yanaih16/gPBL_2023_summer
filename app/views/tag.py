@@ -67,4 +67,4 @@ def match_succes(request):
             item=item,
         )
         match.save()
-        return render(request, 'tag/succes.html')
+        return render(request, 'tag/succes.html',{"matching":match})
