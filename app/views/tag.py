@@ -31,6 +31,14 @@ def matching(request):
             if request.user == user : 
                 continue
             item_tags = Item_Tag.objects.filter(item=item.id)
+            matchs = Matching.objects.filter(item=item.id)
+            f = False
+            for match in matchs:
+                print(match.seller)
+                if match.seller == request.user:
+                    f = True
+            if f:
+                continue
             count = 0
             per = 0.0
             for item_tag in item_tags:
