@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 id="item_name"></h1>
+<p id="item_text"></p>
+<p id="item_img"></p>
+<p id="item_value"></p>
+<p id="item_user"></p>
+<img class='' src=''>
+<button class="btn btn-primary" id="next-button">Next Data</button>
+<form method="POST" action="{%url 'match_succes'%}">
+    {% csrf_token %}
+    <input type="hidden" value="" id="user_id" name="user_id" />
+    <input type="hidden" value="" id="item_id" name="item_id" />
+    <input class="btn btn-primary" type="submit" value="Match">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var currentIndex = 0;
+        var data = JSON.parse('{{ items|safe }}');
+        console.log(data);
+
+        function displayData(index) {
+            if (index < data.length) {
+                document.getElementById('item_name').innerHTML = data[index].name;
+                document.getElementById('item_text').innerHTML = data[index].text;
+                document.getElementById('item_img').innerHTML = "<img class='' src='" + data[index].image + "'>"
+                document.getElementById('item_value').innerHTML = data[index].value;
+                document.getElementById('item_user').innerHTML = data[index].user;
+                document.getElementById('item_id').value = data[index].item_id;
+                document.getElementById('user_id').value = data[index].user_id;
+                currentIndex = index;
+            }
+        }
+
+        $('#next-button').click(function () {
+            displayData(currentIndex + 1);
+        });
+
+        // ページ読み込み時にデータを取得して表示
+        $.ajax({
+            success: function () {
+                displayData(currentIndex);
+            }
+        });
+    });
+</script>
+{% endblock %}

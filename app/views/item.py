@@ -43,6 +43,7 @@ def item_tag_add(request, item_id):
                 item = item,
                 tag = tag,
             )
+            print(item_tag)
             item_tag.save()
         return redirect("item_list")
         
