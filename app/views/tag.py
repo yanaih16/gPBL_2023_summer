@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import Tag, Item, User, Item_Tag
 import json
@@ -10,6 +10,14 @@ model = KeyedVectors.load_word2vec_format(model_dir, binary=True)
 
 @login_required
 def select_tags(request):
+    tag_list = Tag.objects.values("id", "name")
+    context = {
+        "title": "タグ設定",
+        "tag_list": tag_list,
+    }
+    return render(request, 'tag/select_tags.html', context)
+
+def matching(request):
     if request.method == 'POST':
         tag_id_list = request.POST.getlist('tags')
         post_tags = []
@@ -45,10 +53,5 @@ def select_tags(request):
         a = sorted(data, key=operator.itemgetter('per'), reverse=True)
         return render(request, 'tag/matching.html', {'items': json.dumps(a)})
     else:
-        tag_list = Tag.objects.values("id", "name")
-        context = {
-            "title": "タグ設定",
-            "tag_list": tag_list,
-        }
-        return render(request, 'tag/select_tags.html', context)
+        return redirect('select_tags')
 
