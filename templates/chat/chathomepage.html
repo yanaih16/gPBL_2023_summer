@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+      {% for i in match %}
+            <a href="{% url 'chat' i.id %}">{{i}}</a>
+                  <br/>
+      {% endfor %}
+{% endblock content %}
