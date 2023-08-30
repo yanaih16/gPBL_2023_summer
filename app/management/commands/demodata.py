@@ -4,13 +4,20 @@ from ...models import User
 from ...models import Tag
 from ...models import Item_Tag
 import random
+import os
+import environ
+from pathlib import Path
 
 class Command(BaseCommand):
     help = "サンプルデータの作成"
 
     def handle(self, *args, **options):
-        adminname = "admin"
-        adminpass = "admin@"
+                
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        env = environ.Env()
+        env.read_env(os.path.join(BASE_DIR, '.env'))
+        adminname = env('ADMIN_USERNAME')
+        adminpass = env('ADMIN_PASSWORD')
         admin = User(
             username=adminname,
             sex=1,
