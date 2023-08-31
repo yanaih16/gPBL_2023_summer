@@ -11,7 +11,6 @@ def chat(request, matching_id):
     get_match = Matching.objects.get(id=matching_id)
     if request.method == 'POST':
         message = request.POST['message']
-        print(message)
         new_message = Chat(matching_id=get_match, sender=user, message=message)
         new_message.save()
 

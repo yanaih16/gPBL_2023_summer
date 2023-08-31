@@ -29,7 +29,6 @@ def logout_user (request):
 
 def register_user (request):
     if request.method == 'POST':
-        print(request.POST)
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()

@@ -34,7 +34,6 @@ def matching(request):
             matchs = Matching.objects.filter(item=item.id)
             f = False
             for match in matchs:
-                print(match.seller)
                 if match.seller == request.user:
                     f = True
             if f:
@@ -44,7 +43,6 @@ def matching(request):
             for item_tag in item_tags:
                 tag = Tag.objects.get(id=item_tag.tag.id)
                 for post_tag in post_tags:
-                    print(tag.name +" "+post_tag)
                     per += model.similarity(tag.name, post_tag)
                     count += 1
             per /= count
@@ -68,7 +66,6 @@ def match_succes(request):
         seller=User.objects.get(id=request.user.id)
         buyer=User.objects.get(id=request.POST['user_id'])
         item=Item.objects.get(id=request.POST['item_id'])
-        print(request.POST)
         match = Matching(
             seller=seller,
             buyer=buyer,
