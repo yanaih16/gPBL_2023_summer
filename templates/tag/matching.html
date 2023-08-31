@@ -87,7 +87,7 @@
                 document.getElementById('item_text').innerHTML = data[index].text;
                 document.getElementById('item_img').src = data[index].image;
                 document.getElementById('item_value').innerHTML = data[index].value + "円";
-                document.getElementById('item_user').innerHTML = "出品者: " + data[index].user;
+                document.getElementById('item_user').innerHTML = "出品者: " + data[index].user + " 評価:" + data[index].score;
                 document.getElementById('item_id').value = data[index].item_id;
                 document.getElementById('user_id').value = data[index].user_id;
                 currentIndex = index;

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from app.models import Tag, Item, User, Item_Tag, Matching
+from app.models import Tag, Item, User, Item_Tag, Matching, Review
 import json
 from gensim.models import KeyedVectors
 import operator
@@ -32,6 +32,14 @@ def matching(request):
             user = User.objects.get(id=item.user.id)
             if request.user == user:
                 continue
+            reviews = Review.objects.filter(rater=item.user)
+            score = 0
+            num = 0
+            for review in reviews:
+                score += review.score
+                num += 1
+            if num != 0:
+                score /= num
             item_tags = Item_Tag.objects.filter(item=item.id)
             matchs = Matching.objects.filter(item=item.id)
             f = False
@@ -53,6 +61,7 @@ def matching(request):
                     "item_id": item.id,
                     "user_id": user.id,
                     "user": user.username,
+                    "score": score,
                     "name": item.name,
                     "text": item.text,
                     "image": item.image.url,
