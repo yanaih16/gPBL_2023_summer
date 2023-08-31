@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Avg
 from ..models import Review, Matching
-from ..forms.review import ReviewForm
 
 
 def rate_seller(request, matching_id):
