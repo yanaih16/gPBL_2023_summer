@@ -4,13 +4,20 @@ from ...models import User
 from ...models import Tag
 from ...models import Item_Tag
 import random
+import os
+import environ
+from pathlib import Path
 
 class Command(BaseCommand):
     help = "サンプルデータの作成"
 
     def handle(self, *args, **options):
-        adminname = "admin"
-        adminpass = "admin@"
+                
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        env = environ.Env()
+        env.read_env(os.path.join(BASE_DIR, '.env'))
+        adminname = env('ADMIN_USERNAME')
+        adminpass = env('ADMIN_PASSWORD')
         admin = User(
             username=adminname,
             sex=1,
@@ -39,6 +46,7 @@ class Command(BaseCommand):
             tag.save()
 
         tmp = 0
+        img = 0
         for i in range(20):
             user = User.objects.get(username="user" + str(i))
             for j in range(random.randint(0, 3)):
@@ -46,7 +54,7 @@ class Command(BaseCommand):
                     name = "item"+str(i) + "-" + str(j),
                     user = user,
                     text = "item"+str(i) + "-" + str(j),
-                    image = "images/istockphoto.jpg",
+                    image = "images/sample_"+str(img)+".jpg",
                     value = i * 1000 + 1000,
                 )
                 item.save()
@@ -59,6 +67,8 @@ class Command(BaseCommand):
                     )
                     tmp += 1
                     tmp %= 10
+                    img += 1
+                    img %= 3
                     item_tag.save()
 
 
