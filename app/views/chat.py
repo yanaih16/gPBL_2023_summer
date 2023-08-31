@@ -20,6 +20,7 @@ def chat(request, matching_id):
     context = {
         "messages": get_messages,
         "user": user,
+        "matching_id": matching_id,
     }
     return render(request, 'chat/chat.html', context)
 
