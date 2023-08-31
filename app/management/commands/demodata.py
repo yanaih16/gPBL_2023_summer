@@ -46,6 +46,7 @@ class Command(BaseCommand):
             tag.save()
 
         tmp = 0
+        img = 0
         for i in range(20):
             user = User.objects.get(username="user" + str(i))
             for j in range(random.randint(0, 3)):
@@ -53,7 +54,7 @@ class Command(BaseCommand):
                     name = "item"+str(i) + "-" + str(j),
                     user = user,
                     text = "item"+str(i) + "-" + str(j),
-                    image = "images/istockphoto.jpg",
+                    image = "images/sample_"+str(img)+".jpg",
                     value = i * 1000 + 1000,
                 )
                 item.save()
@@ -66,6 +67,8 @@ class Command(BaseCommand):
                     )
                     tmp += 1
                     tmp %= 10
+                    img += 1
+                    img %= 3
                     item_tag.save()
 
 
