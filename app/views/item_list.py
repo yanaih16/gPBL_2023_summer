@@ -14,4 +14,8 @@ class ItemList(LoginRequiredMixin, ListView):
         if self.request.user.is_authenticated:
             return Item.objects.filter(user=self.request.user).order_by("-created_at")
         return Item.objects.none()  # ログインしていない場合は空のクエリセットを返す
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '商品リスト'
+        return context
 
