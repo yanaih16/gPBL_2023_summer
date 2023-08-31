@@ -63,100 +63,107 @@
 
 
 
-.rating {
-    font-size: 30px;
-    margin-bottom: 20px;
-}
+    .rating {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
 
-.star {
-    cursor: pointer;
-    color: gray;
-    transition: color 0.2s;
-}
+    .star {
+        cursor: pointer;
+        color: gray;
+        transition: color 0.2s;
+    }
 
-.star:hover {
-    color: orange;
-}
+    .star:hover {
+        color: orange;
+    }
 
-.review-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Đảm bảo nội dung căn giữa theo chiều dọc */
-    background-color: #f7f7f7; /* Màu nền */
-}
+    .review-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* Đảm bảo nội dung căn giữa theo chiều dọc */
+        background-color: #f7f7f7;
+        /* Màu nền */
+    }
 
-.review-form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 800px; /* Độ rộng của khung đánh giá */
-}
-.review-textarea {
-        width: 100%; /* Đảm bảo rằng textarea chiếm toàn bộ chiều ngang của phần tử cha */
-        height: 150px; /* Điều chỉnh chiều cao của textarea tùy ý */
-        font-size: 16px; /* Kích thước chữ trong textarea */
-        padding: 10px; /* Khoảng cách giữa nội dung và viền của textarea */
-        resize: vertical; 
+    .review-form-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 800px;
+        /* Độ rộng của khung đánh giá */
+    }
+
+    .review-textarea {
+        width: 100%;
+        /* Đảm bảo rằng textarea chiếm toàn bộ chiều ngang của phần tử cha */
+        height: 150px;
+        /* Điều chỉnh chiều cao của textarea tùy ý */
+        font-size: 16px;
+        /* Kích thước chữ trong textarea */
+        padding: 10px;
+        /* Khoảng cách giữa nội dung và viền của textarea */
+        resize: vertical;
+    }
 </style>
 
 <script>
 
-document.addEventListener('DOMContentLoaded', () => {
-    const reviewForm = document.getElementById('review-form');
-    const stars = document.querySelectorAll('.star');
-    const reviewScoreInput = document.getElementById('review-score');
+    document.addEventListener('DOMContentLoaded', () => {
+        const reviewForm = document.getElementById('review-form');
+        const stars = document.querySelectorAll('.star');
+        const reviewScoreInput = document.getElementById('review-score');
 
-    let selectedScore = 0;
+        let selectedScore = 0;
 
-    stars.forEach((star) => {
-        star.addEventListener('click', () => {
-            selectedScore = parseInt(star.getAttribute('data-score'));
-            updateStarColors();
-            reviewScoreInput.value = selectedScore;
-        });
-    });
-
-    function updateStarColors() {
-        stars.forEach((star, index) => {
-            if (index < selectedScore) {
-                star.style.color = 'orange';
-            } else {
-                star.style.color = 'gray';
-            }
-        });
-    }
-
-    ReviewForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const formData = new FormData(reviewForm);
-        const matchingId = ReviewForm.getAttribute('data-matching-id');
-        const url = `/rate/${matchingId}/`;
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                body: formData
-            });
-
-            if (response.ok) {
-                alert('Review has been submitted.');
-                reviewForm.reset();
-                selectedScore = 0;
+        stars.forEach((star) => {
+            star.addEventListener('click', () => {
+                selectedScore = parseInt(star.getAttribute('data-score'));
                 updateStarColors();
-            } else {
-                alert('An error occurred while submitting the review.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
+                reviewScoreInput.value = selectedScore;
+            });
+        });
+
+        function updateStarColors() {
+            stars.forEach((star, index) => {
+                if (index < selectedScore) {
+                    star.style.color = 'orange';
+                } else {
+                    star.style.color = 'gray';
+                }
+            });
         }
+
+        ReviewForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(reviewForm);
+            const matchingId = ReviewForm.getAttribute('data-matching-id');
+            const url = `/rate/${matchingId}/`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert('Review has been submitted.');
+                    reviewForm.reset();
+                    selectedScore = 0;
+                    updateStarColors();
+                } else {
+                    alert('An error occurred while submitting the review.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
     });
-});
 
 </script>
 
 {% endblock %}
-
-
