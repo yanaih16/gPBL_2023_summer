@@ -9,7 +9,7 @@ def rate_seller(request, matching_id):
     buyer = matching.buyer
 
     if request.method == 'POST':
-        score = int(request.POST['rater'])
+        score = int(request.POST['score'])
         text = request.POST['text']
 
         review = Review.objects.create(rater=matching, evaluator=matching, score=score, text=text)

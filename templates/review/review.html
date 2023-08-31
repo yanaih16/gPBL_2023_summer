@@ -7,6 +7,7 @@
             {%csrf_token%}
             <input type="hidden" name="rater" value="{{ request.user.id }}">
             <input type="hidden" name="evaluator" value="{{ matching.seller.id }}">
+            <input type="hidden" id="review-score" name="score" value="0"> <!-- Sửa giá trị mặc định của score -->
             <div class="rating">
                 <span class="star" data-score="1">&#9733;</span>
                 <span class="star" data-score="2">&#9733;</span>
@@ -19,6 +20,7 @@
         </form>
     </div>
 </div>
+
 
 <style>
     .review-container {
@@ -100,9 +102,11 @@
 </style>
 
 <script>
+
 document.addEventListener('DOMContentLoaded', () => {
     const reviewForm = document.getElementById('review-form');
     const stars = document.querySelectorAll('.star');
+    const reviewScoreInput = document.getElementById('review-score');
 
     let selectedScore = 0;
 
@@ -110,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         star.addEventListener('click', () => {
             selectedScore = parseInt(star.getAttribute('data-score'));
             updateStarColors();
-            document.getElementById('review-score').value = selectedScore;
+            reviewScoreInput.value = selectedScore;
         });
     });
 
@@ -127,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ReviewForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const formData = new FormData(ReviewForm);
+        const formData = new FormData(reviewForm);
         const matchingId = ReviewForm.getAttribute('data-matching-id');
         const url = `/rate/${matchingId}/`;
 
@@ -138,19 +142,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                alert('レビューが送信されました。');
+                alert('Review has been submitted.');
                 reviewForm.reset();
                 selectedScore = 0;
                 updateStarColors();
-                
             } else {
-                alert('レビューの送信中にエラーが発生しました。');
+                alert('An error occurred while submitting the review.');
             }
         } catch (error) {
-            console.error('エラー:', error);
+            console.error('Error:', error);
         }
     });
 });
+
 </script>
 
 {% endblock %}
