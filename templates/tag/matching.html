@@ -63,13 +63,13 @@
     </div>
 
     <div class="button-container mt-3">
-        <button class="btn btn-danger btn-lg custom-btn" id="next-button">Next Data</button>
+        <button class="btn btn-danger btn-lg custom-btn" id="next-button">次の商品</button>
 
         <form method="POST" action="{%url 'match_succes'%}" class="ml-auto">
             {% csrf_token %}
             <input type="hidden" value="" id="user_id" name="user_id" />
             <input type="hidden" value="" id="item_id" name="item_id" />
-            <input class="btn btn-success btn-lg custom-btn" type="submit" value="Match">
+            <input class="btn btn-success btn-lg custom-btn" type="submit" value="Match！">
         </form>
     </div>
 </div>
