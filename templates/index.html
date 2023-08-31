@@ -44,7 +44,8 @@
     }
 
     .btn-secondary {
-        background-color: #6c757d;
+        background-color: #008000
+;
     }
 
     .btn-link {
@@ -52,32 +53,58 @@
         color: #007bff;
         text-decoration: underline;
     }
-.user-info {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 20px;
-}
-
-    .user-info p {
-        font-size: 18px;
-        margin-bottom: 10px;
+    .user-info {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 20px;
     }
 
-    .user-info a {
-        display: inline-block;
-        margin-top: 5px;
-        text-decoration: none;
-        color: #007bff;
-        font-weight: bold;
-        transition: color 0.3s ease;
+        .user-info p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .user-info a {
+            display: inline-block;
+            margin-top: 5px;
+            text-decoration: none;
+            color: #FFFF;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .user-info a:hover {
+            color: #0056b3;
+        }
+        .user-info2 {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 20px;
     }
 
-    .user-info a:hover {
-        color: #0056b3;
-    }
+        .user-info2 p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .user-info2 a {
+            display: inline-block;
+            margin-top: 5px;
+            text-decoration: none;
+            color:  #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .user-info2 a:hover {
+            color: #0056b3;
+        }
 </style>
 </head>
 <body>
@@ -88,7 +115,7 @@
                 <a href="{% url 'select_tags' %}" class="btn btn-secondary">商品を購入する</a>
             </div>
             {% if user.is_authenticated %}
-            <div class="user-info">
+            <div class="user-info2">
                 <p>{{ user.get_username }}でログイン中</p>
                 <a href="{% url 'logout' %}" class="btn btn-link">ログアウト</a>
             </div>
