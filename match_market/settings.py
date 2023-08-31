@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'app',
+    'rest_framework',
     'gensim',
 ]
 
