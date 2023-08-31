@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from ..forms.user import SignupForm
 
-def login_user (request):
+
+def login_user(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -11,36 +12,38 @@ def login_user (request):
         if user is not None:
             login(request, user)
             # Redirect to a success page.
-            return redirect('index')
+            return redirect("index")
         else:
             # Return an 'invalid login' error message.
             messages.success(request, ("ErrorLogin"))
-            return redirect('login')
+            return redirect("login")
     else:
         context = {
-            "title" : "ログイン",
+            "title": "ログイン",
         }
         return render(request, "user/login.html", context)
 
-def logout_user (request):
+
+def logout_user(request):
     logout(request)
     messages.success(request, ("Log out success"))
-    return redirect('login')
+    return redirect("login")
 
-def register_user (request):
-    if request.method == 'POST':
+
+def register_user(request):
+    if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect(to='index')
+            return redirect(to="index")
 
     else:
         form = SignupForm()
-    
+
     param = {
-        'form': form,
-        'title': 'ユーザー登録',
+        "form": form,
+        "title": "ユーザー登録",
     }
 
-    return render(request, 'user/register.html', param)
+    return render(request, "user/register.html", param)

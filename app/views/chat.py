@@ -1,16 +1,18 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse, JsonResponse
 from ..models import Chat, User, Matching
 
 
-def MatchingPage (request):
+def MatchingPage(request):
     match = Matching.objects.all()
-    return render(request,"chat/chathomepage.html",{"match":match})
+    return render(request, "chat/chathomepage.html", {"match": match})
+
+
 def chat(request, matching_id):
     user = request.user
     get_match = Matching.objects.get(id=matching_id)
-    if request.method == 'POST':
-        message = request.POST['message']
+    if request.method == "POST":
+        message = request.POST["message"]
         new_message = Chat(matching_id=get_match, sender=user, message=message)
         new_message.save()
 
@@ -21,5 +23,4 @@ def chat(request, matching_id):
         "user": user,
         "matching_id": matching_id,
     }
-    return render(request, 'chat/chat.html', context)
-
+    return render(request, "chat/chat.html", context)
