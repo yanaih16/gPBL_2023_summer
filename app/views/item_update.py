@@ -32,3 +32,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         return Item.objects.filter(user=self.request.user)
     def get_success_url(self):
         return reverse("item_tag_add", args=[str(self.object.pk)])
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '商品編集'
+        return context
